@@ -13,16 +13,22 @@ rotate =  0
 --    m.marioObj.header.gfx.angle.x = m.controller.rawStickY + (m.controller.rawStickY * 20)
 -- end
 
+
 function PikuFunction()
     local m = gMarioStates[0]
     if m.prevAction == ACT_JUMP or m.prevAction == ACT_DOUBLE_JUMP then
         rotate = 0
     end
     if m.action == ACT_JUMP or m.action == ACT_DOUBLE_JUMP then
+        m.action = ACT_JUMP
         m.marioObj.header.gfx.angle.x = rotate
         if m.controller.rawStickY > 64 then
-              m.marioObj.header.gfx.angle.x = rotate
-              rotate = rotate + 150
+            m.marioObj.header.gfx.angle.x = rotate
+            rotate = rotate + 150
+        end
+        if m.controller.rawStickY < -64 then
+            m.marioObj.header.gfx.angle.x = rotate
+            rotate = rotate - 150
         end
      end
  end
@@ -130,9 +136,9 @@ local function on_character_select_load()
     _G.charSelect.credit_add(TEXT_MOD_NAME, "Syning", "Piku's model")
 
     _G.charSelect.character_hook_moveset(CT_PIKU, HOOK_MARIO_UPDATE, PikuFunction)
+
     CSloaded = true
 end
-
 
 
 hook_event(HOOK_ON_MODS_LOADED, on_character_select_load)
