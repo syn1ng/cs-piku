@@ -1,5 +1,5 @@
 -- name: [CS] Piku
--- description: does this work The monster from up the- huh? There's no hill? Where'd he come from then?\n\n\\#ff7777\\This Pack requires Character Select\nto use as a Library!
+-- description: The monster from up the- huh? There's no hill? Where'd he come from then?\n\n\\#ff7777\\This Pack requires Character Select\nto use as a Library!
 
 if not _G.charSelectExists then
     djui_popup_create("\\#ffffdc\\\n"..TEXT_MOD_NAME.."\nRequires the Character Select Mod\nto use as a Library!\n\nPlease turn on the Character Select Mod\nand Restart the Room!", 6)
