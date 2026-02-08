@@ -6,24 +6,31 @@ if not _G.charSelectExists then
     return 0
 end
 
+rotate =  0
+
+-- function rotatepik()
+--    local m = gMarioStates[0]
+--    m.marioObj.header.gfx.angle.x = m.controller.rawStickY + (m.controller.rawStickY * 20)
+-- end
+
+function PikuFunction()
+    local m = gMarioStates[0]
+    if m.prevAction == ACT_JUMP or m.prevAction == ACT_DOUBLE_JUMP then
+        rotate = 0
+    end
+    if m.action == ACT_JUMP or m.action == ACT_DOUBLE_JUMP then
+        m.marioObj.header.gfx.angle.x = rotate
+        if m.controller.rawStickY > 64 then
+              m.marioObj.header.gfx.angle.x = rotate
+              rotate = rotate + 150
+        end
+     end
+ end
+
 local TEXT_MOD_NAME = "[CS] Piku"
 local CSGRAFFITIPIKU = get_texture_info("pikugraffiti")
 local TEX_CHAR_LIFE_ICON = get_texture_info("piku-icon")
 local E_MODEL_CHAR = smlua_model_util_get_id("piku_geo")
-
-
-function PikuFunction(m)
-  if m.playerIndex == 0 then
-    if m.action == ACT_JUMP or m.action == ACT_DOUBLE_JUMP then
-        m.action = ACT_JUMP
-        m.marioObj.header.gfx.angle.x = m.marioObj.header.gfx.angle.x * m.forwardVel * 9000
-    end
-    if m.action == ACT_WALL_KICK_AIR then
-        m.vel.y = 2
-    end
-  end
-
-end
 
 
 local ANIMTABLE_PIKU = {
